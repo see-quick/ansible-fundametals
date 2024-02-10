@@ -1,0 +1,4 @@
+---
+# defaults file for configure_web_server
+apache_service_state: started
+apache_service_enabled: true

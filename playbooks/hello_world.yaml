@@ -1,0 +1,5 @@
+---
+- name: Apply the hello_world role
+  hosts: local_docker_nodes
+  roles:
+    - hello_world

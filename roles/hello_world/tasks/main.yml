@@ -1,0 +1,13 @@
+---
+- name: Create a hello world file
+  ansible.builtin.copy:
+    content: "Hello World!\n"
+    dest: "/tmp/hello_world.txt"
+
+- name: Create a hello world file with variables based on template
+  ansible.builtin.template:
+    src: main.yml.j2
+    dest: /tmp/hello_world.txt
+  vars:
+    variable_1: "this is variable content baby!"
+    variable_2: "this is another one!! :D"

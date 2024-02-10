@@ -1,0 +1,11 @@
+---
+- name: List all files in /etc
+  hosts: local_docker_nodes:local
+  tasks:
+    - name: List files in /etc
+      ansible.builtin.command: ls -l /etc
+      register: ls_result
+
+    - name: Print the output
+      ansible.builtin.debug:
+        msg: "{{ ls_result.stdout_lines }}"

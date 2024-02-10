@@ -1,0 +1,11 @@
+---
+- name: Start the web server
+  hosts: local_docker_nodes
+  become: true
+  vars_files:
+    - ./roles/web_server/files/secret.yml
+  roles:
+    - role: web_server
+      vars:
+        apache_service_state: started
+        apache_service_enabled: true

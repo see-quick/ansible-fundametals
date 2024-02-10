@@ -1,0 +1,9 @@
+---
+- name: Stop the web server
+  hosts: local_docker_nodes
+  become: true
+  roles:
+    - role: web_server
+      vars:
+        apache_service_state: stopped
+        apache_service_enabled: false

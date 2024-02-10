@@ -1,0 +1,8 @@
+[localhost]
+
+[web_servers]
+server1.example.com
+server2.example.com
+
+[db_servers]
+dbserver.example.com

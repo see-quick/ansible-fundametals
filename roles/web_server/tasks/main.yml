@@ -1,0 +1,27 @@
+---
+# tasks file for configure_web_server
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600 # Cache valid for 1 hour to avoid updating too frequently
+  become: true
+
+- name: Ensure Apache is installed
+  ansible.builtin.apt:
+    name: apache2
+    state: present
+  become: true
+  when: apache_service_state == 'started' or apache_service_state == 'restarted'
+
+- name: Check Apache service status
+  ansible.builtin.service_facts:
+
+- name: Set Apache service state
+  ansible.builtin.service:
+    name: apache2
+    state: "{{ apache_service_state }}"
+    enabled: "{{ apache_service_enabled }}"
+  become: true
+  when: >-
+    (apache_service_state == 'stopped' and service_facts.ansible_facts.services is defined and 'apache2' in service_facts.ansible_facts.services and service_facts.ansible_facts.services['apache2'].state == 'running') or
+    apache_service_state in ['started', 'restarted']
